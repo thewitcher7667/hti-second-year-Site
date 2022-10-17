@@ -1,0 +1,52 @@
+body{
+    color:#fff;
+}
+ul{
+    width: 100%;
+    background-color: rgb(69, 103, 125);
+    float: left ; 
+}
+
+li{
+    float: left ; 
+    display: inline !important;
+}
+
+a:hover{
+    font-size: 25px;
+
+}
+.convert{
+    margin-top: 70px;
+    color: aliceblue;
+    width: 100%;
+}
+
+.convert p{
+    display: inline;
+}
+.result{
+    color:aliceblue;
+}
+#tb{
+    background-color:rgb(107, 51, 51);
+}
+#tbdecimal{
+    background-color:rgb(93, 9, 9);
+}
+table{
+    width:100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+thead th{
+padding:10px;
+}
+section div a{
+    font-size: 18px;
+    all:unset;
+}
+section div a:hover{
+    font-size: 18px;
+    cursor:pointer;
+}

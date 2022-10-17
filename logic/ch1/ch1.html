@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/website.css" rel="stylesheet"> 
+    <link href="/logic/ch1/ch1.css" rel="stylesheet">
+    <script defer src="/logic/ch1/ch1.js"></script>
+    <title>Logic</title>
+</head>
+<body>
+    <nav>
+        <h2>My study Second Year</h2>
+        <ul>
+            <li>
+            <a href="/logic/logic.html"  style="color:wheat;">
+                Logic Design
+                 </a>
+                </li>
+                <li>
+                 <a href="/math2/math2.html">
+                 Masth 2
+                 </a>
+                </li>
+        </ul>
+    </nav>
+  <article>
+    <section>
+      <div>
+        <a href="../../../logic/sheet 1 f.pdf" download>Sheet 1</a>
+        <a href="../../../logic/lec 1 f.pdf" download="">Lec 1</a>
+      </div>
+      <div>
+        <input id='addBase' type="number" min="0" placeholder="Add Base">
+      </div>
+    <div class="convert">
+      <input id='enter' type="number" min="0" placeholder="Enter number">
+      <select id="selectInp">
+        <option value="Decimal">Decimal</option>
+        <option value="Binary">Binary</option>
+        <option value="octal">octal</option>
+        <option value="hexadecimal">hexadecimal</option>
+     </select>
+     <p>Conver To</p>
+      <select id="selectInpConvt">
+        <option value="Decimal">Decimal</option>
+        <option value="Binary" selected>Binary</option>
+        <option value="octal">octal</option>
+        <option value="hexadecimal">hexadecimal</option>
+      </select>
+    </div>
+    <div id="result" class="result"></div>
+   <div class="steps" id="steps">
+    <div id="step"></div>
+     <table>
+   <thead>
+    <tr>
+      <th> number</th>
+      <th> decimal</th>
+      <th> reminder</th>
+    </tr>
+   </thead>
+   <tbody id="tb">
+    
+   </tbody>
+   <hr>
+   <tbody id="tbdecimal">
+    
+  </tbody>
+   </table>
+  </div>
+
+    </section>
+  </article>
+</body>
+</html>
