@@ -10,8 +10,8 @@ let addBase = document.getElementById('addBase');
 let inpVla = '';
 let type = {inpConvert:'Decimal' , inpEntered:'Decimal'} ;
 
-let aplha = ['A','B','C','D','E','F','G','H','I','J','K','L','M',"N",'O',"p",'Q','R','S','T','U','V','W','X','Y','Z']
-let alphaHex = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34];
+let aplha = ['A','B','C','D','E','F','G','H','I','J','K','L','M',"N",'O',"P",'Q','R','S','T','U','V','W','X','Y','Z']
+let alphaHex = [10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35];
 
 inp.addEventListener('keypress',(event)=>{
     if(event.code === 'Enter'){
@@ -66,15 +66,26 @@ function convertion(){
     steps.innerHTML= '';
     let res ;//res for result
 //////////////////////////////////////////////
+if(type.inpEntered === 'Binary'){
+    for(let i =0;i<inpVla.length;i++){
+        if((inpVla[i] > 1 || inpVla[i]<-1)){
+           return result.innerText = "Enter Binary Number";
+        }
+       }
+}
+if(type.inpEntered !== 'hexadecimal'){
+    for(let i =0;i<inpVla.length;i++){
+        if(aplha.includes(inpVla[i])){
+           return result.innerText = "Enter Binary Number";
+        }
+       }
+}
+//////////////////////////////////////////////
 if(type.inpConvert === 'Decimal'){
     if(type.inpEntered === 'Decimal'){
         res = theConvertion(inpVla,10,'Decimal','any');
     }else if(type.inpEntered === 'Binary'){
-        let cond = [];
-       for(let i =0;i<inpVla.length;i++){
-        if((inpVla[i] > 1 || inpVla[i]<-1)){cond.push('err');}
-       }
-      cond.length === 0 ? res = theConvertion(inpVla,2,'Binary','any') : res = "Enter Binary Number";
+        res = theConvertion(inpVla,2,'Binary','any')
     }else if(type.inpEntered === 'octal'){
         res =theConvertion(inpVla,8,'octal','any');
     }else if(type.inpEntered === 'hexadecimal'){
