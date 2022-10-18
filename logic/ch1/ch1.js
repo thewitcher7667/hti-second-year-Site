@@ -72,7 +72,7 @@ function convertion(){
     let res ;//res for result
 //////////////////////////////////////////////
 if(type.inpConvert.className && type.inpEntered.className){
-if(type.inpConvert.className == type.inpEntered.className) return result.innerText = "Please Select A diff base";
+if(type.inpConvert.className == type.inpEntered.className) return result.innerText = "Please Select A different base";
 if(type.inpEntered.className !== 'hexadecimal'){
     for(let i =0;i<inpVla.length;i++){
         if(aplha.includes(inpVla[i])){
@@ -99,7 +99,12 @@ if(type.inpEntered.className === 'Decimal'){
     let inpValPre = theConvertion(inpVla,parseInt(type.inpEntered.value),type.inpEntered.className,'any');
     res = theConvertion(inpValPre.toString(),parseInt(type.inpConvert.value),type.inpConvert.className,'decimal');
 }
-  //////////////////////////////////////////////
+//////////////////////////////////////////////
+//////copy result to clip//
+document.getElementById('copy').addEventListener('click',()=>{
+  navigator.clipboard.writeText(res);
+})
+//////////////////////////////////////////////
 result.innerText = "Result is : "+ res;
 }
 

@@ -50,3 +50,11 @@ section div a:hover{
     font-size: 18px;
     cursor:pointer;
 }
+.resultDiv{
+    padding:10px;
+}
+.result{
+    max-width: 90%;
+    padding:10px;
+    overflow-x: auto;
+}
