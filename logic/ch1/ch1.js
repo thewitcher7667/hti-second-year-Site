@@ -66,10 +66,11 @@ let first1 = true;
     
 
 function convertion(){
-    tbdecimal.innerHTML='';
-    tb.innerHTML = '';
-    steps.innerHTML= '';
+    tbdecimal.innerHTML='';//to print the decimal steps table 
+    tb.innerHTML = '';//to print the real no steps table
+    steps.innerHTML= '';//to print any to decimal
     let res ;//res for result
+    document.getElementById('copied').innerText = '';
 //////////////////////////////////////////////
 if(type.inpConvert.className && type.inpEntered.className){
 if(type.inpConvert.className == type.inpEntered.className) return result.innerText = "Please Select A different base";
@@ -103,6 +104,7 @@ if(type.inpEntered.className === 'Decimal'){
 //////copy result to clip//
 document.getElementById('copy').addEventListener('click',()=>{
   navigator.clipboard.writeText(res);
+  document.getElementById('copied').innerText = "copied to clipboard"
 })
 //////////////////////////////////////////////
 result.innerText = "Result is : "+ res;
