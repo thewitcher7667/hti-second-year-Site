@@ -24,8 +24,8 @@ inp.addEventListener('keypress',(event)=>{
 addBase.addEventListener('keypress',(event)=>{
     if(event.code === 'Enter'){
         let val = addBase.value;
-        selectInp.innerHTML += `<option value="${val}">${val}</option>`
-        selectInpConvt.innerHTML += `<option value="${val}">${val}</option>`
+        selectInp.innerHTML += `<option value="${val}" class="${val}"> ${val}</option>`
+        selectInpConvt.innerHTML += `<option value="${val}" class="${val}">${val}</option>`
     }
     let options = document.querySelectorAll('#selectInp option');
     let options2 = document.querySelectorAll('#selectInpConvt option');
@@ -38,27 +38,32 @@ addBase.addEventListener('keypress',(event)=>{
         }
     }
 })
-
+    
+let first1 = true;
     selectInp.addEventListener('change',()=>{
-        if(selectInp.value === 'Binary' ) {
+        let val = selectInp.selectedOptions[0] ;
+        if(val.className === 'Binary' ) {
             inp.setAttribute('max','1');
         }
-        else if(selectInp.value === 'hexadecimal'){
+        else if(val.className === 'hexadecimal'){
             inp.setAttribute('type','text')
             inp.setAttribute('max','')
         }else{
             inp.setAttribute('max','')
             inp.setAttribute('type','number')
         }
-        type.inpEntered = selectInp.value;
+        type.inpEntered = val; 
+        if(first1) document.getElementById('select1').remove(); first1 = false; 
         convertion()
     })
-    
+
+    let first2 = true;
     selectInpConvt.addEventListener('change',()=>{
-        type.inpConvert = selectInpConvt.value;
+        if(first2) document.getElementById('select2').remove(); first2 = false; 
+        type.inpConvert = selectInpConvt.selectedOptions[0];
         convertion()
     }) 
-
+    
 
 function convertion(){
     tbdecimal.innerHTML='';
@@ -66,107 +71,34 @@ function convertion(){
     steps.innerHTML= '';
     let res ;//res for result
 //////////////////////////////////////////////
-if(type.inpEntered === 'Binary'){
-    for(let i =0;i<inpVla.length;i++){
-        if((inpVla[i] > 1 || inpVla[i]<-1)){
-           return result.innerText = "Enter Binary Number";
-        }
-       }
-}
-if(type.inpEntered !== 'hexadecimal'){
+if(type.inpConvert.className && type.inpEntered.className){
+if(type.inpConvert.className == type.inpEntered.className) return result.innerText = "Please Select A diff base";
+if(type.inpEntered.className !== 'hexadecimal'){
     for(let i =0;i<inpVla.length;i++){
         if(aplha.includes(inpVla[i])){
-           return result.innerText = "Enter Binary Number";
+           return result.innerText = "Enter a Number";
+        }if(type.inpEntered.className === 'Binary'){
+            if((inpVla[i] > 1 || inpVla[i]<-1)){
+                return result.innerText = "Enter Binary Number";
+             }
         }
-       }
+    }
+}
+}else{
+    return result.innerText = "Please Select A base";
 }
 //////////////////////////////////////////////
-if(type.inpConvert === 'Decimal'){
-    if(type.inpEntered === 'Decimal'){
-        res = theConvertion(inpVla,10,'Decimal','any');
-    }else if(type.inpEntered === 'Binary'){
-        res = theConvertion(inpVla,2,'Binary','any')
-    }else if(type.inpEntered === 'octal'){
-        res =theConvertion(inpVla,8,'octal','any');
-    }else if(type.inpEntered === 'hexadecimal'){
-        res = theConvertion(inpVla,16,'hexadecimal','any')
-    }else{
-        res = theConvertion(inpVla,type.inpEntered,type.inpEntered,'any')
-    }
+if(type.inpConvert.className === 'Decimal'){
+   res = theConvertion(inpVla,parseInt(type.inpEntered.value),type.inpEntered.className,'any')
 }else
 //////////////////////////////////////////////
-if(type.inpEntered === 'Decimal'){
-    if(type.inpConvert === 'Decimal'){
-        res = theConvertion(inpVla,10,'Decimal','decimal');
-    }else if(type.inpConvert === 'Binary'){
-        res = theConvertion(inpVla,2,'Binary','decimal')
-    }else if(type.inpConvert === 'octal'){
-        res = theConvertion(inpVla,8, 'octal','decimal');
-    }else if(type.inpConvert === 'hexadecimal'){
-        res = theConvertion(inpVla,16,'hexadecimal','decimal')
-    }else{
-        res = theConvertion(inpVla,type.inpConvert,type.inpConvert,'decimal')
-    }
-}else
-//////////////////////////////////////////////
-if(type.inpEntered === 'hexadecimal'){
-  if(type.inpConvert === 'Binary'){
-       let inpValPre = theConvertion(inpVla,16,'hexadecimal','any');
-       res = theConvertion(inpValPre.toString(),2,'Binary','decimal');
-    }else if(type.inpConvert === 'octal'){
-        let inpValPre = theConvertion(inpVla,16,'hexadecimal','any')
-        res =theConvertion(inpValPre.toString(),8,'octal','decimal');
-    }else if(type.inpConvert === 'hexadecimal'){
-        res = 'Conver to proper base'
-    }else{
-        let inpValPre = theConvertion(inpVla,16,'hexadecimal','any')
-        res = theConvertion(inpValPre.toString(),type.inpConvert,type.inpConvert,'decimal')
-    }
-}else
-//////////////////////////////////////////////
-if(type.inpEntered === 'Binary'){
-    if(type.inpConvert === 'Binary'){
-        res = 'Conver to proper base'
-      }else if(type.inpConvert === 'octal'){
-          let inpValPre = theConvertion(inpVla,2,'Binary','any')
-          res =theConvertion(inpValPre.toString(),8,'octal','decimal');
-      }else if(type.inpConvert === 'hexadecimal'){
-        let inpValPre = theConvertion(inpVla,2,'Binary','any');
-        res = theConvertion(inpValPre.toString(),16,'hexadecimal','decimal');
-      }else{
-        let inpValPre = theConvertion(inpVla,2,'Binary','any');
-        res = theConvertion(inpValPre.toString(),type.inpConvert,type.inpConvert,'decimal')
-    }
-  }else 
-  //////////////////////////////////////////////
-  if(type.inpEntered === 'octal'){
-    if(type.inpConvert === 'Binary'){
-        let inpValPre = theConvertion(inpVla,8,'octal','any')
-        res =theConvertion(inpValPre.toString(),2,'Binary','decimal');
-      }else if(type.inpConvert === 'octal'){
-        res = 'Conver to proper base'
-      }else if(type.inpConvert === 'hexadecimal'){
-        let inpValPre = theConvertion(inpVla,8,'octal','any');
-        res = theConvertion(inpValPre.toString(),16,'hexadecimal','decimal');
-      }else{
-        let inpValPre = theConvertion(inpVla,8,'octal','any');
-        res = theConvertion(inpValPre.toString(),type.inpConvert,type.inpConvert,'decimal')
-    }
-  }else{
-    if(type.inpConvert === 'Binary'){
-        let inpValPre = theConvertion(inpVla,type.inpEntered,type.inpEntered,'any')
-        res =theConvertion(inpValPre.toString(),2,'Binary','decimal');
-      }else if(type.inpConvert === 'octal'){
-        let inpValPre = theConvertion(inpVla,type.inpEntered,type.inpEntered,'any')
-        res =theConvertion(inpValPre.toString(),8,'octal','decimal');
-      }else if(type.inpConvert === 'hexadecimal'){
-        let inpValPre = theConvertion(inpVla,type.inpEntered,type.inpEntered,'any')
-        res = theConvertion(inpValPre.toString(),16,'hexadecimal','decimal');
-      }else{
-        let inpValPre = theConvertion(inpVla,type.inpEntered,type.inpEntered,'any')
-        res = theConvertion(inpValPre.toString(),type.inpConvert,type.inpConvert,'decimal')
-    }
-  }
+if(type.inpEntered.className === 'Decimal'){
+    res = theConvertion(inpVla,parseInt(type.inpConvert.value),type.inpConvert.className,'decimal')
+
+}else{
+    let inpValPre = theConvertion(inpVla,parseInt(type.inpEntered.value),type.inpEntered.className,'any');
+    res = theConvertion(inpValPre.toString(),parseInt(type.inpConvert.value),type.inpConvert.className,'decimal');
+}
   //////////////////////////////////////////////
 result.innerText = "Result is : "+ res;
 }
